@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  faiss-server:
+    build: .
+    ports:
+      - "${PORT}:${PORT}"
+    env_file:
+      - .env
