@@ -1,4 +1,4 @@
 fastapi
 uvicorn
 faiss-cpu
-python-dotenv
+python-decouple
