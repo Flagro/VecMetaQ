@@ -3,3 +3,4 @@ uvicorn
 pydantic
 faiss-cpu
 python-decouple
+numpy
