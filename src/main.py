@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from .faiss_index.router import router as faiss_router
+from .vector_storage.router import router as vector_storage_router
 
 app = FastAPI()
-app.include_router(faiss_router)
+app.include_router(vector_storage_router)
