@@ -4,3 +4,4 @@ pydantic
 faiss-cpu
 python-decouple
 numpy
+sentence-transformers
