@@ -33,9 +33,9 @@ class VectorStorage:
         # Mark entries as deleted in metadata database for given file_path
         self.metadata_db.mark_deleted(file_path)
 
-    def search_similar(self, query_text):
+    def search_similar(self, query_text, k=None, distance_threshold=None):
         query_embedding = self.embedding_model.generate_embedding(query_text)
-        indices = self.faiss_index.search_vector(query_embedding)
+        indices = self.faiss_index.search_vector(query_embedding, k, distance_threshold)
         results = self.metadata_db.get_metadata(indices, exclude_deleted=True)
 
         # Aggregate results by file_path and concatenate text chunks
