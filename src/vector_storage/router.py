@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends, HTTPException
-from .models import Vector
 from .vector_storage import VectorStorage
 from ..faiss_index.faiss_index import FaissIndex
 from ..embedding.sentence_embedding import SentenceEmbedding
@@ -14,19 +13,28 @@ metadata_db = MetaDataDataBase()
 vector_storage = VectorStorage(faiss_index, embedding_model, metadata_db)
 
 
-@router.post("/add_vector/")
-def add_vector(vector: Vector, username: str = Depends(get_current_username)):
+@router.post("/add_data/")
+def add_data(text: str, file_path: str, metadata: str, username: str = Depends(get_current_username)):
     try:
-        faiss_index.add_vector(vector.vector)
-        return {"message": "Vector added successfully"}
+        vector_storage.add_data(text, file_path, metadata)
+        return {"message": "Data added successfully"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.post("/search/")
-def search_vector(vector: Vector, username: str = Depends(get_current_username)):
+@router.delete("/delete_data/")
+def delete_data(file_path: str, username: str = Depends(get_current_username)):
     try:
-        distances, indices = faiss_index.search_vector(vector.vector)
-        return {"distances": distances.tolist(), "indices": indices.tolist()}
+        vector_storage.delete_data(file_path)
+        return {"message": "Data marked as deleted"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.post("/search_similar/")
+def search_similar(query: str, username: str = Depends(get_current_username)):
+    try:
+        distances, results = vector_storage.search_similar(query)
+        return {"distances": distances, "results": results}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
