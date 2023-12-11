@@ -6,7 +6,7 @@ class VectorStorage:
 
     def add_data(self, text, file_path, metadata):
         # Generate embedding
-        embedding = self.embedding_model.generate_embedding(text)
+        embedding = self.embedding_model.encode(text)
 
         # Add embedding to FAISS index
         index_id = self.faiss_index.add_vector(embedding)
@@ -20,7 +20,7 @@ class VectorStorage:
 
     def search_similar(self, query_text):
         # Generate embedding for query
-        query_embedding = self.embedding_model.generate_embedding(query_text)
+        query_embedding = self.embedding_model.encode(query_text)
 
         # Search in FAISS
         distances, indices = self.faiss_index.search_vector(query_embedding)
