@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from typing import Optional
+from .models import SearchResponse
 from .vector_storage import VectorStorage
 from ..faiss_index.faiss_index import FaissIndex
 from ..embedding.sentence_embedding import SentenceEmbedding
@@ -32,10 +33,11 @@ def delete_data(file_path: str, username: str = Depends(get_current_username)):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.post("/search_similar/")
+@router.post("/search_similar/", response_model=SearchResponse)
 def search_similar(query: str, k: Optional[int], distance_threshold: Optional[float], username: str = Depends(get_current_username)):
     try:
-        distances, results = vector_storage.search_similar(query)
-        return {"distances": distances, "results": results}
+        # Assuming vector_storage.search_similar returns a list of SearchResult objects
+        results = vector_storage.search_similar(query, k, distance_threshold)
+        return SearchResponse(results=results)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
