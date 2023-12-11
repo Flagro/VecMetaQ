@@ -1,4 +1,4 @@
-def chunk_text(text, max_tokens=512):
+def chunk_text(text, max_tokens):
     # Split text into chunks of max_tokens
     chunks = []
     current_chunk = ""
