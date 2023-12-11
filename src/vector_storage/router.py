@@ -1,11 +1,13 @@
 from fastapi import APIRouter, Depends, HTTPException
 from .models import Vector
-from .faiss_index import FaissIndex
+from ..faiss_index.faiss_index import FaissIndex
+from ..embedding.sentence_embedding import SentenceEmbedding
 from ..auth.dependencies import get_current_username
 
 
 router = APIRouter()
 faiss_index = FaissIndex()
+embedding_model = SentenceEmbedding()
 
 
 @router.post("/add_vector/")
