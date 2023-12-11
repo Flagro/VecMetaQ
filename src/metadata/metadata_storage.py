@@ -11,21 +11,36 @@ class MetaDataDataBase():
         self.Metadata = Metadata
         self.Metadata.metadata.create_all(bind=engine)
     
-    def add(self, obj):
-        self.db.add(obj)
-        self.db.commit()
-        self.db.refresh(obj)
-        return obj
+    def add_metadata(self, index_id, file_path, metadata):
+        db_session = self.db()
+        new_metadata = self.Metadata(faiss_index=index_id, file_path=file_path, metadata=metadata)
+        db_session.add(new_metadata)
+        try:
+            db_session.commit()
+        except:
+            db_session.rollback()
+            raise
+        finally:
+            db_session.close()
 
-    def get(self, obj):
-        return self.db.query(obj).all()
 
-    def delete(self, obj):
-        self.db.delete(obj)
-        self.db.commit()
+    def get_metadata(self, indices, exclude_deleted=True):
+        db_session = self.db()
+        query = db_session.query(self.Metadata).filter(self.Metadata.faiss_index.in_(indices))
+        if exclude_deleted:
+            query = query.filter(self.Metadata.is_deleted == False)
+        results = query.all()
+        db_session.close()
+        return results
 
-    def update(self):
-        self.db.commit()
 
-    def close(self):
-        self.db.close()
+    def mark_deleted(self, file_path):
+        db_session = self.db()
+        db_session.query(self.Metadata).filter(self.Metadata.file_path == file_path).update({"is_deleted": True})
+        try:
+            db_session.commit()
+        except:
+            db_session.rollback()
+            raise
+        finally:
+            db_session.close()
