@@ -11,9 +11,9 @@ class MetaDataDataBase():
         self.Metadata = Metadata
         self.Metadata.metadata.create_all(bind=engine)
     
-    def add_metadata(self, index_id, file_path, metadata):
+    def add_metadata(self, index_id, file_path, metadata_json):
         db_session = self.db()
-        new_metadata = self.Metadata(faiss_index=index_id, file_path=file_path, metadata=metadata)
+        new_metadata = self.Metadata(faiss_index=index_id, file_path=file_path, metadata_json=metadata_json)
         db_session.add(new_metadata)
         try:
             db_session.commit()
