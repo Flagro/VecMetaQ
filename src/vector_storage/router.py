@@ -1,13 +1,17 @@
 from fastapi import APIRouter, Depends, HTTPException
 from .models import Vector
+from .vector_storage import VectorStorage
 from ..faiss_index.faiss_index import FaissIndex
 from ..embedding.sentence_embedding import SentenceEmbedding
+from ..metadata.metadata_storage import MetaDataDataBase
 from ..auth.dependencies import get_current_username
 
 
 router = APIRouter()
 faiss_index = FaissIndex()
 embedding_model = SentenceEmbedding()
+metadata_db = MetaDataDataBase()
+vector_storage = VectorStorage(faiss_index, embedding_model, metadata_db)
 
 
 @router.post("/add_vector/")
