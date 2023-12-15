@@ -1,6 +1,6 @@
 # 🚀 **ProjectTextFAISS**
 
-Part of a suite including [`ProjectTextAgent`](https://github.com/Flagro/ProjectTextAgent) and [`ProjectDataBaseQnA`](https://github.com/Flagro/ProjectDataBaseQnA), ProjectTextFAISS is a FastAPI web app encapsulating a FAISS vector index for easy management of embeddings and metadata.
+Part of a [`ProjectText Suite`](https://github.com/Flagro/ProjectTextSuite). ProjectTextFAISS is a FastAPI web app encapsulating a FAISS vector index for easy management of embeddings and metadata.
 
 ## 🌟 **Features**
 - **Add Data**: Add text, file path, and metadata using `POST /add_data/`.
