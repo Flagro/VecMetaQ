@@ -1,6 +1,6 @@
-# 🚀 **ProjectTextFAISS**
+# 🚀 **VecMetaQ**
 
-Part of a [`ProjectText Suite`](https://github.com/Flagro/ProjectTextSuite). ProjectTextFAISS is a FastAPI web app encapsulating a FAISS vector index for easy management of embeddings and metadata.
+Part of a [`ProjectText Suite`](https://github.com/Flagro/ProjectTextSuite). VecMetaQ (Vector Metadata Query) is a FastAPI web app encapsulating a FAISS vector index for easy management of embeddings and metadata.
 
 ## 🌟 **Features**
 - **Add Data**: Add text, file path, and metadata using `POST /add_data/`.
@@ -23,4 +23,4 @@ Accessible by default at `127.0.0.1:8000`.
 - **Search Similar (POST /search_similar/)**: Expects `query`, optional `k` (int), `distance_threshold` (float), and credentials.
 
 ## 🤝 **Collaboration & Issues**
-Open for collaboration; check the [issues page](https://github.com/Flagro/ProjectTextFAISS/issues) for discussions.
+Open for collaboration; check the [issues page](https://github.com/Flagro/VecMetaQ/issues) for discussions.
