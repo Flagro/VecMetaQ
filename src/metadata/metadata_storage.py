@@ -11,9 +11,9 @@ class MetaDataDataBase():
         self.Metadata = Metadata
         self.Metadata.metadata.create_all(bind=engine)
     
-    def add_metadata(self, index_id, file_path, metadata_json):
+    def add_metadata(self, index_id, tag, metadata_json):
         db_session = self.db()
-        new_metadata = self.Metadata(faiss_index=index_id, file_path=file_path, metadata_json=metadata_json)
+        new_metadata = self.Metadata(faiss_index=index_id, tag=tag, metadata_json=metadata_json)
         db_session.add(new_metadata)
         try:
             db_session.commit()
@@ -34,9 +34,9 @@ class MetaDataDataBase():
         return results
 
 
-    def mark_deleted(self, file_path):
+    def mark_deleted(self, tag):
         db_session = self.db()
-        db_session.query(self.Metadata).filter(self.Metadata.file_path == file_path).update({"is_deleted": True})
+        db_session.query(self.Metadata).filter(self.Metadata.tag == tag).update({"is_deleted": True})
         try:
             db_session.commit()
         except:
