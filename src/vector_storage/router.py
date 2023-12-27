@@ -16,18 +16,18 @@ vector_storage = VectorStorage(faiss_index, embedding_model, metadata_db)
 
 
 @router.post("/add_data/")
-def add_data(text: str, file_path: str, metadata: str, username: str = Depends(get_current_username)):
+def add_data(text: str, tag: str, metadata: str, username: str = Depends(get_current_username)):
     try:
-        vector_storage.add_data(text, file_path, metadata)
+        vector_storage.add_data(text, tag, metadata)
         return {"message": "Data added successfully"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.delete("/delete_data/")
-def delete_data(file_path: str, username: str = Depends(get_current_username)):
+def delete_data(tag: str, username: str = Depends(get_current_username)):
     try:
-        vector_storage.delete_data(file_path)
+        vector_storage.delete_data(tag)
         return {"message": "Data marked as deleted"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
