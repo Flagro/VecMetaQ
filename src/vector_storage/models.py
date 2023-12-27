@@ -5,7 +5,7 @@ from typing import List
 class SearchResult(BaseModel):
     index: int
     distance: float
-    file_path: str
+    tag: str
     metadata: str
 
 

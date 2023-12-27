@@ -9,5 +9,5 @@ class Metadata(Base):
     __tablename__ = "metadata"
     faiss_index = Column(Integer, primary_key=True, index=True)
     is_deleted = Column(Boolean, default=False)
-    file_path = Column(String, index=True)
+    tag = Column(String, index=True)
     metadata_json = Column(String)

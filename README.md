@@ -3,8 +3,8 @@
 Part of a [`ProjectText Suite`](https://github.com/Flagro/ProjectTextSuite). VecMetaQ (Vector Metadata Query) is a FastAPI web app encapsulating a FAISS vector index for easy management of embeddings and metadata.
 
 ## 🌟 **Features**
-- **Add Data**: Add text, file path, and metadata using `POST /add_data/`.
-- **Delete Data**: Mark data as deleted via file path using `DELETE /delete_data/`.
+- **Add Data**: Add text, tag, and metadata using `POST /add_data/`.
+- **Delete Data**: Mark data as deleted via tag using `DELETE /delete_data/`.
 - **Search Similar**: Search for similar text using `POST /search_similar/`.
 
 ## 🚀 **Getting Started**
@@ -18,8 +18,8 @@ docker compose up
 Accessible by default at `127.0.0.1:8000`. 
 
 🛠️ **API Endpoints**
-- **Add Data (POST /add_data/)**: Requires `text`, `file_path`, `metadata`, and credentials.
-- **Delete Data (DELETE /delete_data/)**: Needs `file_path` and credentials.
+- **Add Data (POST /add_data/)**: Requires `text`, `tag`, `metadata`, and credentials.
+- **Delete Data (DELETE /delete_data/)**: Needs `tag` and credentials.
 - **Search Similar (POST /search_similar/)**: Expects `query`, optional `k` (int), `distance_threshold` (float), and credentials.
 
 ## 🤝 **Collaboration & Issues**
