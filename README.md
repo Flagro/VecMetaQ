@@ -16,8 +16,8 @@ docker compose up
 
 Or to use the GHCR you can (make sure to have the .env file ready):
 ```bash
-docker pull ghcr.io/Flagro/VecMetaQ
-docker run -it --env-file .env ghcr.io/Flagro/VecMetaQ
+docker pull ghcr.io/flagro/vecmetaq
+docker run -it --env-file .env ghcr.io/flagro/vecmetaq
 ```
 
 ## 📘 **Usage**
