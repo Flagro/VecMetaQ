@@ -2,8 +2,8 @@ version: '3.8'
 services:
   vecmetaq:
     build: .
-    command: uvicorn src.main:app --host 0.0.0.0 --port ${PORT}
+    command: uvicorn src.main:app --host 0.0.0.0 --port ${VECMETAQ_PORT}
     ports:
-      - "${HOST}:${PORT}:${PORT}"
+      - "${VECMETAQ_HOST}:${VECMETAQ_PORT}:${VECMETAQ_PORT}"
     env_file:
       - .env
