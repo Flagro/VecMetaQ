@@ -9,7 +9,7 @@ class VectorStorage:
 
     def add_data(self, text, tag, metadata):
         for chunk in chunk_text(text, self.embedding_model.max_tokens):
-            embedding = self.embedding_model.generate_embedding(chunk)
+            embedding = self.embedding_model.encode(chunk)
             index_id = self.faiss_index.add_vector(embedding)
             self.metadata_db.add_metadata(index_id, tag, metadata)
 
@@ -18,7 +18,7 @@ class VectorStorage:
         self.metadata_db.mark_deleted(tag)
 
     def search_similar(self, query_text, k=None, distance_threshold=None):
-        query_embedding = self.embedding_model.generate_embedding(query_text)
+        query_embedding = self.embedding_model.encode(query_text)
         indices = self.faiss_index.search_vector(query_embedding, k, distance_threshold)
         results = self.metadata_db.get_metadata(indices, exclude_deleted=True)
 
